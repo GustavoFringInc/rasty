@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rasty and Rahardi - Digital Business</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+  body {
+    margin: 0;
+    font-family: 'Merriweather', serif;
+    background: #121212;
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  header {
+    background: linear-gradient(90deg, #2a2a2a 0%, #444 100%);
+    padding: 1.8rem 3rem;
+    text-align: center;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.75);
+    z-index: 10;
+  }
+
+  /* Updated Title - simpler and elegant */
+  header h1 {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 2.8rem;
+    color: #f7f7f7;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font-style: normal;
+  }
+
+  main {
+    flex-grow: 1;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #2f2f2f, #181818);
+    color: #f2f2f2;
+    text-align: left;
+    padding: 6rem 5rem 4rem;
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-text {
+    flex: 1 1 320px;
+  }
+
+  .hero h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 0.85s ease forwards;
+    animation-delay: 0.25s;
+    font-style: normal;
+    letter-spacing: 1.2px;
+  }
+
+  .hero p {
+    font-size: 1.3rem;
+    max-width: 620px;
+    color: #bcbcbc;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.85s ease forwards;
+    animation-delay: 0.55s;
+    line-height: 1.6;
+  }
+
+  /* Elegant R&D Logo container */
+  .hero-logo {
+    flex: 1 1 280px;
+    max-width: 320px;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.85s ease forwards;
+    animation-delay: 0.85s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-logo svg {
+    width: 180px;
+    height: 180px;
+    fill: #bbb;
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.7));
+    transition: fill 0.4s ease, transform 0.4s ease, filter 0.4s ease;
+  }
+
+  /* Animated state */
+  .hero-logo.active svg {
+    animation: glowPulse 1.6s ease infinite alternate;
+    fill: #ffcc00;
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 15px #ffcc00);
+  }
+
+  /* Features Section */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    gap: 2.5rem;
+    padding: 3.5rem 5rem;
+    background-color: #222;
+  }
+
+  .feature-item {
+    background: #333;
+    border-radius: 14px;
+    padding: 2.3rem 2.2rem;
+    box-shadow: 0 7px 15px rgba(0,0,0,0.55);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 0.75s ease forwards;
+  }
+  .feature-item:nth-child(1) {
+    animation-delay: 1.2s;
+  }
+  .feature-item:nth-child(2) {
+    animation-delay: 1.4s;
+  }
+  .feature-item:nth-child(3) {
+    animation-delay: 1.6s;
+  }
+
+  .feature-item:hover,
+  .feature-item:focus {
+    transform: translateY(-6px) scale(1.04);
+    box-shadow: 0 14px 24px rgba(0,0,0,0.75);
+    outline: none;
+  }
+
+  .feature-item h3 {
+    margin-top: 0;
+    margin-bottom: 1.3rem;
+    font-weight: 700;
+    color: #f2f2f2;
+    font-size: 1.6rem;
+    letter-spacing: 0.5px;
+  }
+
+  .feature-item p {
+    color: #d0d0d0;
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+
+  /* Contact Section */
+  .contact-section {
+    background: #181818;
+    padding: 4rem 5rem 3rem;
+  }
+
+  .contact-section h2 {
+    font-size: 2.6rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    letter-spacing: 1.1px;
+    color: #f0f0f0;
+  }
+
+  form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+  }
+
+  label {
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: 0.35rem;
+    color: #ccc;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    padding: 0.65rem 1rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1.8px solid #444;
+    background: #272727;
+    color: #eee;
+    resize: vertical;
+    transition: border-color 0.25s ease;
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  textarea:focus {
+    border-color: #757575;
+    outline: none;
+    background: #333;
+    color: #f3f3f3;
+  }
+
+  textarea {
+    min-height: 100px;
+  }
+
+  button {
+    margin-top: 1.2rem;
+    background: #444;
+    border: none;
+    color: #eee;
+    padding: 0.85rem 1.6rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 7px;
+    cursor: pointer;
+    letter-spacing: 0.9px;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover,
+  button:focus {
+    background: #5a5a5a;
+    outline: none;
+  }
+
+  /* Reviews Section */
+  .reviews-section {
+    background: #1c1c1c;
+    padding: 4rem 5rem 5rem;
+  }
+
+  .reviews-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: #f4f4f4;
+    text-align: center;
+    letter-spacing: 1.1px;
+  }
+
+  .reviews-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 2.5rem;
+  }
+
+  .review-card {
+    background: #333;
+    border-radius: 14px;
+    padding: 2rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    transition: box-shadow 0.25s ease;
+  }
+
+  .review-card:hover,
+  .review-card:focus {
+    box-shadow: 0 14px 32px rgba(0,0,0,0.75);
+    outline: none;
+  }
+
+  .review-text {
+    font-size: 1rem;
+    color: #d6d6d6;
+    margin-bottom: 1.2rem;
+  }
+
+  .review-author {
+    font-style: italic;
+    font-weight: 600;
+    color: #ccc;
+    font-size: 0.95rem;
+    text-align: right;
+  }
+
+  footer {
+    background: #222;
+    text-align: center;
+    padding: 1.5rem 2rem;
+    color: #888;
+    font-size: 0.9rem;
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes glowPulse {
+    0% {
+      fill: #ffcc00;
+      filter: drop-shadow(0 0 5px #ffcc00);
+      transform: scale(1.05);
+    }
+    100% {
+      fill: #ffd733;
+      filter: drop-shadow(0 0 15px #ffd733);
+      transform: scale(1.15);
+    }
+  }
+
+  /* Floating AI Chat Widget */
+  .chat-widget-button {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: #25d366;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(37, 211, 102,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+  }
+
+  .chat-widget-button:hover,
+  .chat-widget-button:focus {
+    background: #1ebe5a;
+    outline: none;
+  }
+
+  .chat-widget-button svg {
+    width: 28px;
+    height: 28px;
+    fill: white;
+  }
+
+  .chat-widget {
+    position: fixed;
+    bottom: 80px;
+    right: 1.5rem;
+    width: 320px;
+    max-height: 420px;
+    background: #121212;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.8);
+    border-radius: 15px;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1000;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .chat-widget.active {
+    display: flex;
+    animation: fadeInUp 0.3s ease forwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .chat-header {
+    background: #25d366;
+    padding: 15px 18px;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.7px;
+    text-align: center;
+    user-select: none;
+  }
+
+  .chat-messages {
+    flex-grow: 1;
+    padding: 12px 15px;
+    overflow-y: auto;
+    background: #181818;
+  }
+
+  .chat-message {
+    margin-bottom: 12px;
+    max-width: 85%;
+    padding: 10px 13px;
+    border-radius: 18px;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  }
+
+  .chat-message.user {
+    background: #25d366;
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+
+  .chat-message.ai {
+    background: #444;
+    color: #ddd;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+
+  .chat-input-area {
+    background: #222;
+    padding: 10px 12px;
+    display: flex;
+    gap: 8px;
+  }
+
+  .chat-input-area input[type="text"] {
+    flex-grow: 1;
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    border-radius: 22px;
+    border: none;
+    background: #333;
+    color: #eee;
+    outline: none;
+  }
+
+  .chat-input-area button {
+    background: #25d366;
+    border: none;
+    color: white;
+    font-weight: 700;
+    padding: 0 1rem;
+    border-radius: 22px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .chat-input-area button:hover,
+  .chat-input-area button:focus {
+    background: #1ebe5a;
+    outline: none;
+  }
+
+
+  /* Responsive tweaks */
+  @media (max-width: 900px) {
+    .hero {
+      padding: 4rem 2rem 3rem;
+      justify-content: center;
+      text-align: center;
+    }
+    .hero-text {
+      flex-basis: 100%;
+    }
+    .hero-logo {
+      flex-basis: 280px;
+      max-width: 280px;
+      margin: 0 auto;
+      filter: drop-shadow(0 3px 3px rgba(0,0,0,0.7));
+    }
+    .features {
+      padding: 3rem 2rem;
+    }
+    .contact-section {
+      padding: 3.2rem 2rem 3rem;
+    }
+    .reviews-section {
+      padding: 3rem 2rem 4rem;
+    }
+    form {
+      max-width: 100%;
+    }
+    .reviews-container {
+      grid-template-columns: 1fr;
+    }
+    .chat-widget {
+      width: 90vw;
+      max-height: 60vh;
+      right: 5%;
+      bottom: 75px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    header h1 {
+      font-size: 2.2rem;
+    }
+    .hero h2 {
+      font-size: 2.1rem;
+    }
+    button {
+      font-size: 1rem;
+      padding: 0.7rem 1.3rem;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Rasty &amp; Rahardi</h1>
+</header>
+<main>
+  <section class="hero" aria-label="Introduction">
+    <div class="hero-text">
+      <h2>Your Trusted Digital Business Partner</h2>
+      <p>Empowering your success with innovative digital solutions. We bridge creativity and technology to grow your brand in the digital world.</p>
+    </div>
+    <div class="hero-logo" role="button" tabindex="0" aria-pressed="false" aria-label="Interactive R and D logo">
+      <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        viewBox="0 0 220 220" 
+        fill="none" 
+        aria-hidden="true" 
+        focusable="false"
+        >
+        <circle cx="110" cy="110" r="105" stroke="#bbb" stroke-width="8"/>
+        <path d="M 60 150 L 60 70 Q 90 70 90 100 Q 90 115 75 115 L 90 150" stroke="#bbb" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 75 115 L 100 70" stroke="#bbb" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 110 140 Q 130 150 140 120 Q 145 110 120 95 Q 110 85 130 80 Q 150 75 150 95 Q 150 120 130 130" stroke="#bbb" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 170 150 L 170 70 Q 135 70 135 110 Q 135 150 170 150" stroke="#bbb" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </section>
+  <section class="features" aria-label="Business Features and Services">
+    <article class="feature-item" tabindex="0">
+      <h3>Digital Marketing</h3>
+      <p>Boost your online presence with targeted campaigns, SEO, and content strategies tailored for your audience.</p>
+    </article>
+    <article class="feature-item" tabindex="0">
+      <h3>Web Development</h3>
+      <p>Build responsive, user-friendly websites that engage visitors and convert leads efficiently.</p>
+    </article>
+    <article class="feature-item" tabindex="0">
+      <h3>Consulting &amp; Strategy</h3>
+      <p>Benefit from expert insights and strategic planning to optimize your digital business growth.</p>
+    </article>
+  </section>
+  <section class="contact-section" aria-label="Contact form">
+    <h2>Contact Us</h2>
+    <form id="contact-form" novalidate>
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" placeholder="Your full name" required autocomplete="name" />
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email" />
+      <label for="message">Message</label>
+      <textarea id="message" name="message" placeholder="Your message..." required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+  <section class="reviews-section" aria-label="User reviews">
+    <h2>What Our Clients Say</h2>
+    <div class="reviews-container">
+      <article class="review-card" tabindex="0">
+        <p class="review-text">"Rasty and Rahardi transformed our online presence with professional marketing and web solutions. Highly recommended!"</p>
+        <p class="review-author">— Anita Carter, CEO of BrightVision</p>
+      </article>
+      <article class="review-card" tabindex="0">
+        <p class="review-text">"Their consulting and strategic insights significantly boosted our digital growth. The team is skilled and very responsive."</p>
+        <p class="review-author">— Michael Chen, Founder of TechInsights</p>
+      </article>
+      <article class="review-card" tabindex="0">
+        <p class="review-text">"Professional, timely, and efficient service with a personal touch. The new website is sleek and user-friendly."</p>
+        <p class="review-author">— Sarah Johnson, Marketing Manager at Creativa</p>
+      </article>
+    </div>
+  </section>
+</main>
+
+<!-- Floating Chat Widget Button -->
+<button aria-label="Open chat with AI" title="Chat with AI" class="chat-widget-button" aria-expanded="false" aria-controls="chat-widget">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"/>
+  </svg>
+</button>
+
+<!-- Floating AI Chat Widget -->
+<section id="chat-widget" class="chat-widget" aria-hidden="true" role="region" aria-label="Chat with AI widget">
+  <div class="chat-header">Chat with AI</div>
+  <div class="chat-messages" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
+  <div class="chat-input-area">
+    <input type="text" id="chat-input" placeholder="Type a message..." aria-label="Message input" autocomplete="off" />
+    <button id="chat-send-button" aria-label="Send message">Send</button>
+  </div>
+</section>
+
+<footer>
+  &copy; 2024 Rasty and Rahardi. All rights reserved.
+</footer>
+<script>
+  // Header logo click animation toggle
+  const heroLogo = document.querySelector('.hero-logo');
+  heroLogo.addEventListener('click', () => {
+    heroLogo.classList.toggle('active');
+    heroLogo.setAttribute('aria-pressed', heroLogo.classList.contains('active'));
+  });
+  heroLogo.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      heroLogo.click();
+    }
+  });
+
+  // Contact form submission handler
+  const contactForm = document.getElementById('contact-form');
+  contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (!contactForm.checkValidity()) {
+      contactForm.reportValidity();
+      return;
+    }
+    alert('Thank you for contacting Rasty and Rahardi. We will get back to you shortly.');
+    contactForm.reset();
+  });
+
+  // Floating chat widget elements
+  const chatButton = document.querySelector('.chat-widget-button');
+  const chatWidget = document.getElementById('chat-widget');
+  const chatMessages = chatWidget.querySelector('.chat-messages');
+  const chatInput = document.getElementById('chat-input');
+  const chatSendBtn = document.getElementById('chat-send-button');
+
+  // Toggle chat widget visibility
+  chatButton.addEventListener('click', () => {
+    const isActive = chatWidget.classList.toggle('active');
+    chatWidget.setAttribute('aria-hidden', !isActive);
+    chatButton.setAttribute('aria-expanded', isActive);
+    if (isActive) {
+      chatInput.focus();
+    }
+  });
+
+  // Add message function (type: 'user' or 'ai', text string)
+  function addMessage(type, text) {
+    const messageEl = document.createElement('div');
+    messageEl.classList.add('chat-message', type);
+    messageEl.textContent = text;
+    chatMessages.appendChild(messageEl);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  // Simple AI response logic (mock)
+  function getMockAIResponse(message) {
+    const lowerMsg = message.toLowerCase();
+    if (!message.trim()) {
+      return "Please enter a message so I can assist you.";
+    }
+    if (lowerMsg.includes('pricing')) {
+      return "Our pricing depends on the service and project scope. Contact us for detailed info.";
+    } else if (lowerMsg.includes('services')) {
+      return "We offer digital marketing, web development, and consulting tailored to your needs.";
+    } else if (lowerMsg.includes('contact')) {
+      return "You can contact us at contact@rastyandrahardi.com or use the contact form above.";
+    } else if (lowerMsg.includes('hello') || lowerMsg.includes('hi')) {
+      return "Hello! How can I assist you today?";
+    }
+    return "Thank you for your message. Our team will review and respond as soon as possible.";
+  }
+
+  // Handle sending a chat message
+  function sendChatMessage() {
+    const userMessage = chatInput.value.trim();
+    if (!userMessage) return;
+    addMessage('user', userMessage);
+    chatInput.value = '';
+    chatInput.focus();
+    addMessage('ai', 'Typing...');
+    chatMessages.lastChild.scrollIntoView({behavior: 'smooth'});
+    setTimeout(() => {
+      const aiResponse = getMockAIResponse(userMessage);
+      // Replace the last 'Typing...' message with the real response
+      const typingMsg = chatMessages.querySelector('.chat-message.ai:last-child');
+      if (typingMsg && typingMsg.textContent === 'Typing...') {
+        typingMsg.textContent = aiResponse;
+      }
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }, 1250);
+  }
+
+  // Click send
+  chatSendBtn.addEventListener('click', () => {
+    sendChatMessage();
+  });
+
+  // Press Enter in input
+  chatInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendChatMessage();
+    }
+  });
+</script>
+</body>
+</html>
